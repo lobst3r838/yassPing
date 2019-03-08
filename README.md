@@ -2,7 +2,7 @@
 PREFAZIONE
 Usando la libreria "pythonping" questo script necessita che l'utente sia root o che abbia i permessi sufficenti sui socket.
 
-USO: yassPing indirizzoIP
+USO: yassPing ip
 ESEMPIO: yassPing 192.168.1.1
   
 Questo comando "pinga" l'ip passato come parametro fino alla pressione di CTRL-C
