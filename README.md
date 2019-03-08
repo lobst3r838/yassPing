@@ -1,11 +1,12 @@
 # yassPing
 PREFAZIONE
-La libreria "pythonping" crea un socket e di conseguenza questo script necessita che l'utente sia root o che abbia i permessi socket.
+Usando la libreria "pythonping" questo script necessita che l'utente sia root o che abbia i permessi sufficenti sui socket.
 
-USO: yassPing <indirizzoIP> <numero pacchetti>'
-ESEMPIO: yassPing 192.168.1.1 100
+USO: yassPing indirizzoIP
+ESEMPIO: yassPing 192.168.1.1
   
-Questo comando lancia 100 ping verso l'ip 192.168.1.1
+Questo comando "pinga" l'ip passato come parametro fino alla pressione di CTRL-C
 
 Cosa cambia da un comunissimo ping allora?
-In primo luogo, in caso di pacchetto perso (o con RTT > 1sec) lo script avvisa del pacchetto perso, in secondo luogo o al termine dell'esecuzione o in caso di interruzione (CTRL+C) lo script riepiloga quanti pacchetti sono andati persi e a che orario.
+1. Il ping non mi dice quando un pacchetto viene perso (linux), semplicemente l’icmp_seq salta la sequenza per quanti pacchetti non tornano
+2. il ping tradizionale non da evidenza ne a che ora ne quanti ne quanti pacchetti di fila vengono persi (1000 pacchetti su 1 milione: perderne 1 ogni 1000 è diverso che 1000 di fila!)
