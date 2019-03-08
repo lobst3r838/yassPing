@@ -15,25 +15,26 @@ def checkIP(ip):
         return True
 
 
-def stats(errori):
+def stats(errori, i):
     print('\nStatistiche')
     print('-----------')
+    print('Pacchetti inviati: ' + str(i))
     print('Pacchetti persi: ' + str(len(errori)))
     for e in errori:
         print('ERRORE: ' + str(e))
 
 if __name__ == '__main__':
     if os.geteuid() == 0:
-        if len(sys.argv) != 3 or checkIP(sys.argv[1]):
-            print('\nUSO: yassPing <indirizzoIP> <numero pacchetti>')
+        if len(sys.argv) != 2 or checkIP(sys.argv[1]):
+            print('\nUSO: yassPing <indirizzoIP>')
             print('ESEMPIO:')
-            print('yassPing 192.168.1.1 100')
-            print('In qualche distribuzione GNU/Linux potrebbe essere necessario eseguire il comando come root')
+            print('yassPing 192.168.1.1')
         else:
             ip = sys.argv[1]
-            conteggio = sys.argv[2]
             errori = []
-            for i in range(1, int(conteggio)+1):
+            i = 0
+            while True:
+                i += 1
                 try:
                     dataPing = datetime.now().strftime('%H:%M:%S')
                     r = ping(str(ip), count=1, timeout=1)
@@ -44,9 +45,9 @@ if __name__ == '__main__':
                         print(str(dataPing) + ' [' + str(i) + '] VERSO: ' + str(ip) + ' TEMPO: ' + str(r.rtt_max))
                         sleep(1)
                 except KeyboardInterrupt:
-                    stats(errori)
+                    stats(errori, i)
                     sys.exit(0)
 
-            stats(errori)
+            stats(errori, i)
     else:
         print('\nDevi essere root per eseguire questo stupido script')
